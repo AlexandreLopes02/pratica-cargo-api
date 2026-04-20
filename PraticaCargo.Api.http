@@ -1,0 +1,6 @@
+@PraticaCargo.Api_HostAddress = http://localhost:5067
+
+GET {{PraticaCargo.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

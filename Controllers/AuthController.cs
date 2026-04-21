@@ -52,7 +52,11 @@ public class AuthController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> Login(LoginRequest req)
     {
-        var user = await _ctx.Users.FirstOrDefaultAsync(u => u.Name == req.Name && u.Password == req.Password);
+        var login = req.Name.Trim();
+        var user = await _ctx.Users.FirstOrDefaultAsync(u =>
+            (u.Name == login || u.Email == login) &&
+            u.Password == req.Password);
+
         if (user is null) return Unauthorized("Usuário ou senha inválidos.");
 
         var token = GenerateJwt(user);
